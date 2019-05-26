@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
-  }
+  },  { path: 'add-alarm', loadChildren: './add-alarm/add-alarm.module#AddAlarmPageModule' }
+
 ];
 
 @NgModule({
