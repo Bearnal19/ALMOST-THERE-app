@@ -1,0 +1,31 @@
+.main-menu{
+  ion-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+  }
+  label {
+    display: block;
+  }
+  color: var(--ion-text-color);
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,.13))));
+}
+.list-menu {
+  width: 100%;
+}
+.element-menu-list {
+  ion-icon {
+    margin-right: 4px;
+    vertical-align: text-top;
+  }
+  label {
+    width: 100%;
+  }
+  font-size: 20px;
+  color: var(--ion-text-color);
+  :hover {
+    cursor: pointer;
+  }
+}
