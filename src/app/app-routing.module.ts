@@ -4,18 +4,21 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'list',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: 'list',
+    loadChildren: './modules/list/list.module#ListPageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+    path: 'add-alarm',
+    loadChildren: './modules/add-alarm/add-alarm.module#AddAlarmPageModule'
   },
-  { path: 'add-alarm', loadChildren: './add-alarm/add-alarm.module#AddAlarmPageModule' }
+  {
+    path: 'about',
+    loadChildren: './modules/about/about.module#AboutPageModule'
+  },
 ];
 
 @NgModule({
