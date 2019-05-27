@@ -9,12 +9,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './modules/list/list.module#ListPageModule'
+    loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'about',
-    loadChildren: './modules/about/about.module#AboutPageModule'
-  }
+    path: 'list',
+    loadChildren: './list/list.module#ListPageModule'
+  },
+  { path: 'add-alarm', loadChildren: './add-alarm/add-alarm.module#AddAlarmPageModule' }
 ];
 
 @NgModule({
