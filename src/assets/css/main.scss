@@ -1,31 +1,76 @@
 .main-menu{
   ion-icon {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
   }
-  label {
-    display: block;
+  div {
+    display: table-cell;
+    p {
+      width: 145px;
+      white-space: pre-line;
+      margin: 0;
+      display: table-cell;
+      vertical-align: middle;
+      padding-left: 10px;
+    }
   }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: var(--ion-text-color);
-  padding: 10px;
-  text-align: center;
+  padding: 20px 10px 20px 20px;
   border-bottom: 1px solid var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,.13))));
+}
+.profile-menu{
+  width: 60px;
+  height: 60px;
+  display: table-cell;
+  margin-right: 10px;
+  img{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
 }
 .list-menu {
   width: 100%;
+  padding: 0;
+  padding-bottom: 52px;
 }
 .element-menu-list {
   ion-icon {
     margin-right: 4px;
-    vertical-align: text-top;
+    vertical-align: middle;
+    font-size: 35px;
   }
   label {
     width: 100%;
+    vertical-align: middle;
   }
-  font-size: 20px;
+  display: table;
+  padding: 15px 20px 15px 20px;
+  font-size: 25px;
   color: var(--ion-text-color);
   :hover {
     cursor: pointer;
   }
+}
+.new-alarm{
+  width: 100%;
+  padding: 15px 30px 15px 30px;
+  text-align: center;
+  background: #394B55;
+  ion-button {
+    width: 100%;
+  }
+}
+.login {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #394B55;
+  width: 100%;
+  text-align: center;
 }

@@ -1,47 +1,32 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu color="gold">
       <div class="main-menu">
-        <ion-icon name="contact"></ion-icon>
-        <label>Sing in</label>
+        <div>
+          <div class="profile-menu">
+            <img src="./assets/image/images.jpg" alt="Avatar">
+          </div>
+          <p>Manuel Alejandro Murillo Macias</p>
+        </div>
+        <ion-icon name="settings"></ion-icon>
+      </div>
+      <div class="new-alarm">
+        <ion-button color="blue3598DB">New alarm</ion-button>
       </div>
       <ion-content>
-        <ion-item-divider>
-          <ion-list class="list-menu">
-            <div auto-hide="false" *ngFor="let p of appPages.mainSection" [routerDirection]="'root'" [routerLink]="[p.url]">
-              <div class="element-menu-list">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                <label>
-                  {{p.title}}
-                </label>
-              </div>
+        <ion-list class="list-menu">
+          <div auto-hide="false" *ngFor="let p of appPages" [routerDirection]="'root'" [routerLink]="[p.url]">
+            <div class="element-menu-list">
+              <ion-icon slot="start" [name]="p.icon" [ngStyle]="{'color': p.color}"></ion-icon>
+              <label>
+                {{p.title}}
+              </label>
             </div>
-          </ion-list>
-        </ion-item-divider>
-        <ion-item-divider>
-          <ion-list class="list-menu">
-            <div auto-hide="false" *ngFor="let p of appPages.secondarySection" [routerDirection]="'root'" [routerLink]="[p.url]">
-              <div class="element-menu-list">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                <label>
-                  {{p.title}}
-                </label>
-              </div>
-            </div>
-          </ion-list>
-        </ion-item-divider>
-        <ion-item-divider>
-          <ion-list class="list-menu">
-            <div auto-hide="false" *ngFor="let p of appPages.configurationSection" [routerDirection]="'root'" [routerLink]="[p.url]">
-              <div class="element-menu-list">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                <label>
-                  {{p.title}}
-                </label>
-              </div>
-            </div>
-          </ion-list>
-        </ion-item-divider>
+          </div>
+        </ion-list>
+        <div class="login">
+          <p>Log out</p>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet main> </ion-router-outlet>

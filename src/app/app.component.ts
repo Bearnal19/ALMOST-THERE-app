@@ -9,44 +9,38 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public appPages = {
-    mainSection: [
-      {
-        title: 'Home',
-        url: '/home',
-        icon: 'home'
-      },
-      {
-        title: 'Notifications',
-        url: '/about',
-        icon: 'notifications'
-      }
-    ],
-    secondarySection: [
-      {
-        title: 'Settings',
-        url: '/about',
-        icon: 'settings'
-      },
-      {
-        title: 'Comments',
-        url: '/about',
-        icon: 'chatboxes'
-      }
-    ],
-    configurationSection: [
-      {
-        title: 'Help',
-        url: '/about',
-        icon: 'help'
-      },
-      {
-        title: 'About',
-        url: '/about',
-        icon: 'book'
-      }
-    ],
-  };
+  public appPages = [
+    {
+      title: 'Home',
+      url: '/home',
+      icon: 'home',
+      color: '#2B9483'
+    },
+    {
+      title: 'Notifications',
+      url: '/about',
+      icon: 'notifications',
+      color: '#FFA837'
+    },
+    {
+      title: 'Comments',
+      url: '/about',
+      icon: 'chatboxes',
+      color: '#F4FA28'
+    },
+    {
+      title: 'Help',
+      url: '/about',
+      icon: 'help',
+      color: '#8BDB24'
+    },
+    {
+      title: 'About',
+      url: '/about',
+      icon: 'book',
+      color: '#AFB4AE'
+    }
+  ];
   darkTheme = false;
 
   constructor(
