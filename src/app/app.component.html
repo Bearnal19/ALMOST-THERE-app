@@ -10,9 +10,6 @@
         </div>
         <ion-icon name="settings"></ion-icon>
       </div>
-      <div class="new-alarm">
-        <ion-button color="blue3598DB" (click)="goToAddAlarm()">New alarm</ion-button>
-      </div>
       <ion-content>
         <ion-list class="list-menu">
           <div auto-hide="false" *ngFor="let p of appPages" [routerDirection]="'root'" [routerLink]="[p.url]">
