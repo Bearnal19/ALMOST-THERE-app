@@ -19,7 +19,7 @@ export class AppComponent {
     },
     {
       title: 'Notifications',
-      url: '/about',
+      url: '/map',
       icon: 'notifications',
       color: '#FFA837'
     },

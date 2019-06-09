@@ -16,9 +16,14 @@ const routes: Routes = [
     loadChildren: './modules/add-alarm/add-alarm.module#AddAlarmPageModule'
   },
   {
+    path: 'map',
+    loadChildren: './modules/map/map.module#MapPageModule'
+  },
+  {
     path: 'about',
     loadChildren: './modules/about/about.module#AboutPageModule'
-  },
+  },  { path: 'map', loadChildren: './modules/map/map.module#MapPageModule' },
+
 ];
 
 @NgModule({
