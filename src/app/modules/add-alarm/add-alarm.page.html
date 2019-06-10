@@ -1,13 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Añadir Alarma</ion-title>
+    <ion-button color="dark222428" slot="start" (click)="backToItemAlarm()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-button color="dark222428" slot="end" (click)="backToItemAlarm()">
+      <ion-icon slot="icon-only" name="save"></ion-icon>
+    </ion-button>
   </ion-toolbar>
- </ion-header>
+</ion-header>
  
  <ion-content>
  
-  <ion-card class="welcome-card">
-    <ion-img src="/assets/img/carte.png"></ion-img>
+  <ion-card class="welcome-card" (click)="editLocation()">
+    <!-- <ion-img src="/assets/img/carte.png"></ion-img> -->
+    <ion-img [src]="urlStaticMap"></ion-img>
     <ion-card-header>
  
  
