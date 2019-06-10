@@ -13,7 +13,7 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/list',
+      url: '/item-alarm',
       icon: 'home',
       color: '#2B9483'
     },

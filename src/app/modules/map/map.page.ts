@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -8,13 +9,17 @@ import * as mapboxgl from 'mapbox-gl';
 })
 export class MapPage implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken')
     .set('pk.eyJ1IjoibWFubmxleDIxIiwiYSI6ImNqd3A1enA3cDE2NjUzeXA4dnowOHNiMTAifQ.rjWxHhVcMdnciPeu6BYyfQ');
   }
 
   ngOnInit() {
     this.initMap();
+  }
+
+  backToAddAlarm() {
+    this.router.navigateByUrl('/add-alarm');
   }
 
   initMap(): void {
