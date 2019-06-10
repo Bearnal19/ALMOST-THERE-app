@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
+    redirectTo: 'item-alarm',
     pathMatch: 'full'
   },
   {
@@ -16,9 +16,18 @@ const routes: Routes = [
     loadChildren: './modules/add-alarm/add-alarm.module#AddAlarmPageModule'
   },
   {
+    path: 'map',
+    loadChildren: './modules/map/map.module#MapPageModule'
+  },
+  {
     path: 'about',
     loadChildren: './modules/about/about.module#AboutPageModule'
   },
+  {
+    path: 'item-alarm',
+    loadChildren: './modules/item-alarm/item-alarm.module#ItemAlarmPageModule'
+  },
+
 ];
 
 @NgModule({
