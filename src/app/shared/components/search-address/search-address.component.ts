@@ -37,11 +37,13 @@ export class SearchAddressComponent implements OnInit {
   }
 
   focusFunction() {
+    document.getElementById('search-form').parentElement.classList.add('focus');
     document.getElementById('search-form').classList.add('focus');
     this.search();
   }
 
   focusOutFunction() {
+    document.getElementById('search-form').parentElement.classList.remove('focus');
     document.getElementById('search-form').classList.remove('focus');
     document.getElementById('search-result').classList.remove('hasItems');
   }

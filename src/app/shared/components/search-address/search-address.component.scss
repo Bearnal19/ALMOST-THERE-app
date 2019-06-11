@@ -23,6 +23,7 @@ body {
 /*--------------------
 App
 --------------------*/
+
 .search-form {
   position: relative;
   z-index: 1;
@@ -38,6 +39,7 @@ App
 
   &.focus {
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+    opacity: 1;
   }
 }
 
@@ -72,7 +74,11 @@ App
   background: none;
   outline: none!important;
   cursor: pointer;
+  opacity: 0.5;
   
+  &.focus {
+    opacity: 1;
+  }
   ion-icon{
     font-size: 19px;
   }
