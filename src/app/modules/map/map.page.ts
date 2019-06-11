@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { Router } from '@angular/router';
+import { config } from 'src/app/core/config/config';
+import { MapUtils } from 'src/app/core/config/map-utils';
+import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
 
 @Component({
   selector: 'app-map',
@@ -8,8 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements OnInit {
-
-  constructor(private router: Router) {
+  map: any;
+  geojson = {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: []
+      },
+      properties: {
+        title: 'Mapbox',
+        description: 'Washington, D.C.'
+      }
+    }]
+  };
+  constructor(private router: Router, private apiMapbox: ApiMapboxService) {
     Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken')
     .set('pk.eyJ1IjoibWFubmxleDIxIiwiYSI6ImNqd3A1enA3cDE2NjUzeXA4dnowOHNiMTAifQ.rjWxHhVcMdnciPeu6BYyfQ');
   }
@@ -23,19 +40,23 @@ export class MapPage implements OnInit {
   }
 
   initMap(): void {
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: 'map', // container id
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-96, 37.8], // starting position
-      zoom: 3 // starting zoom
-      });
+      style: 'mapbox://styles/mapbox/streets-v11', // map style
+      center: [config.lng, config.lat], // starting position
+      zoom: 15 // starting zoom
+    });
 
-      // Add geolocate control to the map.
-    map.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-    }));
+    // Add Marker to the map.
+    MapUtils.addMarker([config.lng, config.lat], this.map);
+  }
+
+  flyTo(item): void {
+    // Go to the coordinates on map
+    this.map.flyTo({
+      center: item.geometry.coordinates
+    });
+
+    MapUtils.addMarker(item.geometry.coordinates, this.map);
   }
 }

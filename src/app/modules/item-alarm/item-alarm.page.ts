@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { config } from '../../core/config/config';
+import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
 
 @Component({
   selector: 'app-item-alarm',
@@ -63,7 +65,7 @@ export class ItemAlarmPage implements OnInit {
     }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiMapbox: ApiMapboxService) { }
 
   ngOnInit() {
   }
