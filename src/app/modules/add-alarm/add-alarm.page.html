@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button color="dark222428" slot="start" (click)="backToItemAlarm()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-button color="dark222428" slot="end" (click)="backToItemAlarm()">
+      <ion-icon slot="icon-only" name="save"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+ 
+ <ion-content>
+ 
+  <ion-card class="welcome-card" (click)="editLocation()">
+    <!-- <ion-img src="/assets/img/carte.png"></ion-img> -->
+    <ion-img [src]="urlStaticMap"></ion-img>
+    <ion-card-header>
+ 
+ 
+      <ion-card-subtitle>Elige la ubicación</ion-card-subtitle>
+      <ion-card-title>Mapa</ion-card-title>
+    </ion-card-header>
+ 
+    <ion-card-content>
+      <ion-icon name="pin" slot="start"></ion-icon> Sierra de Cuale 2155,Las Águilas, 45080, Zapopan, Jal.
+    </ion-card-content>
+  </ion-card>
+ 
+  <ion-card>
+    <ion-item>
+ 
+      <ion-label>Mañana-sáb., 25 May</ion-label>
+      <ion-icon name="calendar"></ion-icon>
+    </ion-item>
+ 
+    <ion-card-content>
+      <ion-label>**DATE PICKER**</ion-label>
+      <ion-item>
+        <ion-input placeholder="Nombre de la alarma"></ion-input>
+        <ion-icon name="alarm" slot="start"></ion-icon>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label>Sonido de alarma </ion-label>
+        <ion-icon name="volume-high" slot="start"></ion-icon>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Vibración </ion-label>
+        <ion-icon name="phone-portrait" slot="start"></ion-icon>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label>Aplazar</ion-label>
+        <ion-icon name="arrow-round-forward" slot="start"></ion-icon>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+ 
+ 
+ </ion-content>
