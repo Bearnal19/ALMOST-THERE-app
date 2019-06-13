@@ -1,0 +1,41 @@
+:root {
+  // GOLD
+  --ion-color-gold: #ffd700;
+  --ion-color-gold-rgb: 255, 215, 0;
+  --ion-color-gold-contrast: #000000;
+  --ion-color-gold-contrast-rgb: 0, 0, 0;
+  --ion-color-gold-shade: #e0bd00;
+  --ion-color-gold-tint: #ffdb1a;
+
+  --ion-color-blue3598DB: #3598DB;
+  --ion-color-blue3598DB-rgb: 53, 152, 219;
+  --ion-color-blue3598DB-contrast: #ffffff;
+  --ion-color-blue3598DB-contrast-rgb: 255, 255, 255;
+  --ion-color-blue3598DB-shade: #3171e0;
+  --ion-color-blue3598DB-tint: #4c8dff;
+
+  --ion-color-dark222428: #222428;
+  --ion-color-dark222428-rgb: 53, 152, 219;
+  --ion-color-dark222428-contrast: #ffffff;
+  --ion-color-dark222428-contrast-rgb: 255, 255, 255;
+  --ion-color-dark222428-shade: #1e2023;
+  --ion-color-dark222428-tint: #383a3e;
+
+  --ion-color-colorD9918B: #D9918B;
+  --ion-color-colorD9918B-rgb: 53, 152, 219;
+  --ion-color-colorD9918B-contrast: #000000;
+  --ion-color-colorD9918B-contrast-rgb: 0, 0, 0;
+  --ion-color-colorD9918B-shade: #bf807a;
+  --ion-color-colorD9918B-tint: #dd9c97;
+}
+$customColors: ('white', 'info', 'gold', 'silver', 'bronze', 'correct', 'wrong', 'gray','blue3598DB','dark222428','colorD9918B');
+@each $color in $customColors {
+.ion-color-#{$color} {
+--ion-color-base: var(--ion-color-#{$color}) !important;
+--ion-color-base-rgb: var(--ion-color-#{$color}-rgb) !important;
+--ion-color-contrast: var(--ion-color-#{$color}-contrast) !important;
+--ion-color-contrast-rgb: var(--ion-color-#{$color}-contrast-rgb) !important;
+--ion-color-shade: var(--ion-color-#{$color}-shade) !important;
+--ion-color-tint: var(--ion-color-#{$color}-tint) !important;
+}
+}
