@@ -12,6 +12,7 @@ import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
 export class SearchAddressComponent implements OnInit {
   @Output() fly: EventEmitter<any> = new EventEmitter<any>();
   items = {
+    features: []
   };
   valueSearch  = '';
   constructor(private apiMapbox: ApiMapboxService) { }
@@ -24,7 +25,7 @@ export class SearchAddressComponent implements OnInit {
         this.items = response.body;
         document.getElementById('search-result').classList.add('hasItems');
       }, (error) => {
-        this.items = {};
+        this.items = { features: [] };
         document.getElementById('search-result').classList.remove('hasItems');
       }
     );
@@ -33,7 +34,7 @@ export class SearchAddressComponent implements OnInit {
   clickResultSearch(item: any): void {
     this.fly.emit(item);
     document.getElementById('search-result').classList.remove('hasItems');
-    this.items = {};
+    this.items = { features: [] };
   }
 
   focusFunction() {

@@ -4,14 +4,107 @@ mgl-map {
 }
 
 .search-button{
+  height: 0;
   position: absolute;
-  top: 133px;
+  top: 100px;
   z-index: 1;
   width: 100%;
-  // opacity: 0.5;
-  // transition: all 0.5s ease;
-  
-  // &.focus {
-  //   opacity: 1;
-  // }
+}
+
+.save-button{
+  position: absolute;
+  bottom: 30px;
+  z-index: 1;
+  width: 100%;
+
+  div{
+    position: relative;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 390px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #5a6674;
+    display: table;
+    p{
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 19px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.back-button{
+  position: absolute;
+  top: 28px;
+  left: 18px;
+  z-index: 2;
+
+  div{
+    background: #fff;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: table;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: #5a6674;
+    padding: 5px;
+    
+    ion-icon{
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 2px;
+    }
+  }
+}
+
+.gps-button{
+  position: absolute;
+  top: 28px;
+  right: 18px;
+  z-index: 2;
+
+  div{
+    background: #fff;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: table;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: #5a6674;
+    padding: 5px;
+    
+    ion-icon{
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 2px;
+    }
+  }
+}
+
+/*
+  MEDIA QUERIES
+*/
+@media (max-width: 375px) {
+  .save-button{
+    div{
+      width: 275px;
+    }
+  }
+}
+
+@media (min-width: 375px) and (max-width: 450px) {
+  .save-button{
+    div{
+      width: 330px;
+    }
+  }
 }

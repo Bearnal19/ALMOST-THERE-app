@@ -1,10 +1,11 @@
 import { Component, Renderer2 } from '@angular/core';
-
+import { config, accessToken } from 'src/app/core/config/config';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { ApiMapboxService } from './core/http/api-mapbox.service';
+import * as mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,12 @@ export class AppComponent {
       color: '#8BDB24'
     },
     {
+      title: 'Settings',
+      url: '/settings',
+      icon: 'settings',
+      color: '#AFB4AE'
+    },
+    {
       title: 'About',
       url: '/about',
       icon: 'book',
@@ -61,6 +68,8 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken')
+    .set(accessToken);
     this.apiMapbox.getLocation().then((response) => {}).catch((error) => {});
   }
 

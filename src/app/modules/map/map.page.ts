@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { Router } from '@angular/router';
-import { config } from 'src/app/core/config/config';
+import { config, accessToken } from 'src/app/core/config/config';
 import { MapUtils } from 'src/app/core/config/map-utils';
 import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-map',
@@ -26,9 +27,7 @@ export class MapPage implements OnInit {
       }
     }]
   };
-  constructor(private router: Router, private apiMapbox: ApiMapboxService) {
-    Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken')
-    .set('pk.eyJ1IjoibWFubmxleDIxIiwiYSI6ImNqd3A1enA3cDE2NjUzeXA4dnowOHNiMTAifQ.rjWxHhVcMdnciPeu6BYyfQ');
+  constructor(private router: Router, private apiMapbox: ApiMapboxService, public toastController: ToastController) {
   }
 
   ngOnInit() {
@@ -40,6 +39,7 @@ export class MapPage implements OnInit {
   }
 
   initMap(): void {
+    const This = this;
     this.map = new mapboxgl.Map({
       container: 'map', // container id
       style: 'mapbox://styles/mapbox/streets-v11', // map style
@@ -47,16 +47,43 @@ export class MapPage implements OnInit {
       zoom: 15 // starting zoom
     });
 
-    // Add Marker to the map.
+    this.map.on('click', (e: any) => {
+      MapUtils.addMarker([e.lngLat.lng, e.lngLat.lat], this.map);
+      MapUtils.flyTo([e.lngLat.lng, e.lngLat.lat], This.map);
+      // MapUtils.makeCircle([e.lngLat.lng, e.lngLat.lat], This.map, 0.5);
+    });
+
     MapUtils.addMarker([config.lng, config.lat], this.map);
   }
 
-  flyTo(item): void {
-    // Go to the coordinates on map
-    this.map.flyTo({
-      center: item.geometry.coordinates
-    });
-
+  flyTo(item: any): void {
+    MapUtils.flyTo(item.geometry.coordinates, this.map);
     MapUtils.addMarker(item.geometry.coordinates, this.map);
+  }
+
+  goToMyLocation(): void {
+    this.apiMapbox.getLocation().then((response) => {
+      MapUtils.flyTo([response.coords.longitude, response.coords.latitude], this.map);
+      MapUtils.addMarker([response.coords.longitude, response.coords.latitude], this.map);
+    }).catch((error) => {});
+  }
+
+  async test() {
+    const toast = await this.toastController.create({
+      header: 'Toast header',
+      message: 'Click to Close',
+      position: 'bottom',
+      duration: 4000,
+      buttons: [
+        {
+          text: 'Done',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    toast.present();
   }
 }

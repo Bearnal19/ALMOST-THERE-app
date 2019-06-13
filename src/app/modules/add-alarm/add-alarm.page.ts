@@ -16,7 +16,7 @@ export class AddAlarmPage implements OnInit {
   constructor(private router: Router, private apiMapbox: ApiMapboxService) { }
 
   ngOnInit() {
-    this.urlStaticMap = this.apiMapbox.getStaticMap();
+    this.urlStaticMap = this.apiMapbox.getStaticMap({lng: config.lng, lat: config.lat});
   }
 
   backToItemAlarm() {

@@ -3,7 +3,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { accessToken, config } from '../config/config';
-
+import { MapUtils } from '../config/map-utils';
+import * as mapboxgl from 'mapbox-gl';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,9 +13,13 @@ export class ApiMapboxService {
   constructor(public http: HttpClient) {
   }
 
-  getSearch(value: string, params: any): any {
+  // Api: Realiza busquedas en base a un string
+  // Params: valor a buscar, radio del area a buscar (10km dfault)
+  getSearch(value: string, params: any, radiusInKm?: number): any {
+    const dots = MapUtils.createGeoJSONDots([config.lng, config.lat], radiusInKm, 63);
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?`
     + `proximity=${config.lng},${config.lat}`
+    + `&bbox=${dots[42][0]},${dots[42][1]},${dots[7][0]},${dots[7][1]}`
     + `&limit=${params.limit}`
     + `&access_token=${accessToken}`;
     return this.http.get<Array<any>>(url, {
@@ -26,6 +31,8 @@ export class ApiMapboxService {
     );
   }
 
+  // Api: Realiza localizacion actual
+  // Params:
   getLocation(): any {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -46,8 +53,12 @@ export class ApiMapboxService {
     });
   }
 
-  getStaticMap(): string {
-    const urlStaticMap = `https://api.mapbox.com/v4/mapbox.emerald/${config.lng},${config.lat},15/600x300@2x.png`
+  // Api: Obtiene una "foto" del mapa en una posicion especifica [lng, lat]
+  // Params: valor a buscar, radio del area a buscar (10km dfault)
+  getStaticMap(coordinates?: any): string {
+    coordinates.lng = coordinates.lng || config.lng;
+    coordinates.lat = coordinates.lat || config.lat;
+    const urlStaticMap = `https://api.mapbox.com/v4/mapbox.emerald/${coordinates.lng},${coordinates.lat},15/600x300@2x.png`
       + `?access_token=${accessToken}`;
     return urlStaticMap;
   }

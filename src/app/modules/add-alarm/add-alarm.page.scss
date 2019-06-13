@@ -1,0 +1,29 @@
+.back-button{
+  display: table;
+  width: 25px;
+  height: 25px;
+  margin-left: 8px;
+  ion-icon{
+    display: table-cell;
+  }
+}
+.save-button{
+  display: table;
+  width: 25px;
+  height: 25px;
+  margin-right: 8px;
+  ion-icon{
+    display: table-cell;
+  }
+}
+ion-toolbar {
+  max-height: 64px;
+}
+
+// @supports not (-webkit-overflow-scrolling: touch) {
+//   /* CSS for other than iOS devices */ 
+//   ion-toolbar {
+//     height: 45px;
+//   }
+// }
+
