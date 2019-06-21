@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
+import { config } from 'src/app/core/config/config';
 
 @Component({
   selector: 'app-add-alarm',
@@ -11,26 +13,10 @@ export class AddAlarmPage implements OnInit {
   urlStaticMap = '';
   lat = null;
   lng = null;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiMapbox: ApiMapboxService) { }
 
   ngOnInit() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const locationMarker = null;
-      if (locationMarker) {
-        // return if there is a locationMarker bug
-        return;
-      }
-      this.lat = position.coords.latitude;
-      this.lng = position.coords.longitude;
-      this.urlStaticMap = `https://api.mapbox.com/v4/mapbox.emerald/${this.lng},${this.lat},15/600x300@2x.png`
-      + `?access_token=pk.eyJ1IjoibWFubmxleDIxIiwiYSI6ImNqd3A1enA3cDE2NjUzeXA4dnowOHNiMTAifQ.rjWxHhVcMdnciPeu6BYyfQ`;
-    }, (error) => {
-        console.log('Error: ', error);
-    },
-      {
-      enableHighAccuracy: true
-      }
-    );
+    this.urlStaticMap = this.apiMapbox.getStaticMap({lng: config.lng, lat: config.lat});
   }
 
   backToItemAlarm() {

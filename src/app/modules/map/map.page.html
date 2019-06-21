@@ -1,14 +1,21 @@
-<ion-header>
-  <ion-button color="dark222428" (click)="backToAddAlarm()">
+<div class="back-button">
+  <div (click)="backToAddAlarm()">
     <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-  </ion-button>
-</ion-header>
-
+  </div>
+</div>
+<div class="gps-button">
+  <div (click)="goToMyLocation()">
+    <ion-icon slot="icon-only" name="locate"></ion-icon>
+  </div>
+</div>
+<app-search-address 
+  class="search-button"
+  (fly)="flyTo($event)"
+></app-search-address>
+<div class="save-button">
+  <div color="colorD9918B" (click)="backToAddAlarm()">
+    <p>Guardar</p>
+  </div>
+</div>
 <div id="map" style="width: 100%;height: 100%;">
-  <!-- <mgl-map
-    [style]="'mapbox://styles/mapbox/streets-v9'"
-    [zoom]="[9]"
-    [center]="[-74.50, 40]"
-  >
-  </mgl-map> -->
 </div>

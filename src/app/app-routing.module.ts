@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'item-alarm',
     loadChildren: './modules/item-alarm/item-alarm.module#ItemAlarmPageModule'
   },
+  {
+    path: 'settings',
+    loadChildren: './modules/settings/settings.module#SettingsPageModule'
+  },
+
 
 ];
 
