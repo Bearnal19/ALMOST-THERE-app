@@ -30,8 +30,7 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: './modules/settings/settings.module#SettingsPageModule'
-  },
-
+  },  { path: 'modal-config', loadChildren: './modules/map/modal-config/modal-config.module#ModalConfigPageModule' }
 
 ];
 

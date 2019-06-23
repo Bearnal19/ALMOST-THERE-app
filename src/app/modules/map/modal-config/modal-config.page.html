@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configuration</ion-title>
+    <div class="close-button" slot="end" (click)="closeModal()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="div-container">
+    <label>Rango de aviso: {{ formatSize(range) }}</label>
+    <ion-range 
+      style="padding: 0px;" 
+      [(ngModel)]="range" 
+      min="100" 
+      max="10000" 
+      step="100" 
+      ticks="false" 
+      snaps="true"
+    >
+      <ion-icon size="small" slot="start" name="remove" (click)="minus()"></ion-icon>
+      <ion-icon slot="end" name="add" (click)="plus()"></ion-icon>
+    </ion-range>
+  </div>
+</ion-content>

@@ -3,14 +3,17 @@ import * as mapboxgl from 'mapbox-gl';
 export class MapUtils {
   // Agrega un marcador en el mapa
   // Params; cordenadas [lng, lat] y la instancia del mapa
-  static addMarker(coordinates: any, map: any): void {
-    this.removeElementsByClass('marker');
-    const el = document.createElement('div');
-    el.className = 'marker';
+  static addMarker(coordinates: any, map: any): any {
+    return new Promise((resolve) => {
+      this.removeElementsByClass('marker');
+      const el = document.createElement('div');
+      el.className = 'marker';
 
-    new mapboxgl.Marker(el)
-      .setLngLat(coordinates)
-      .addTo(map);
+      new mapboxgl.Marker(el)
+        .setLngLat(coordinates)
+        .addTo(map);
+      resolve();
+    });
   }
 
   static removeElementsByClass(className): void {
@@ -105,8 +108,10 @@ export class MapUtils {
 
   // Dibuja un circulo en una posicion y radio
   // params: Punto central [lng, lat], instancia de mapa, diametro
-  static makeCircle(coordinates: any, map: any, diametro?: number): void {
+  static makeCircle(coordinates: any, map: any, diametro?: number, color?: string): void {
     diametro = diametro || 10;
+    color = color || 'blue';
+
     const c = MapUtils.createGeoJSONCircle(coordinates, diametro, 63);
 
     if (map.getLayer('polygon')) {
@@ -121,8 +126,8 @@ export class MapUtils {
       source: 'polygon',
       layout: {},
       paint: {
-          'fill-color': 'blue',
-          'fill-opacity': 0.6
+          'fill-color': color,
+          'fill-opacity': 0.5
       }
     });
   }

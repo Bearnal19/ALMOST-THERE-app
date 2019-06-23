@@ -1,0 +1,22 @@
+.close-button{
+  display: table;
+  width: 25px;
+  height: 25px;
+  margin-right: 8px;
+  ion-icon{
+    display: table-cell;
+  }
+}
+
+ion-toolbar {
+  max-height: 64px;
+}
+
+.div-container {
+  padding: 10px 20px 10px 20px;
+  font-size: 12px;
+  
+  ion-range{
+    padding: 0;
+  }
+}
