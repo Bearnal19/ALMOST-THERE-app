@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   color: var(--ion-text-color);
-  padding: 20px 10px 20px 20px;
+  padding: 25px 10px 10px 20px;
   border-bottom: 1px solid var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,.13))));
 }
 .profile-menu{
@@ -71,7 +71,8 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  background: #394B55;
+  background: #ff4949;
   width: 100%;
   text-align: center;
+  color: black;
 }
