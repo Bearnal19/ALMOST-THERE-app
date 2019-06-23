@@ -47,7 +47,6 @@ export class MapPage implements OnInit {
   }
 
   initMap(): void {
-    const kms = Utils.mToKm(this.range);
     const This = this;
     this.map = new mapboxgl.Map({
       container: 'map', // container id
@@ -57,26 +56,32 @@ export class MapPage implements OnInit {
     });
 
     this.map.on('click', (e: any) => {
+      const kms = Utils.mToKm(this.range);
+      config.lng = e.lngLat.lng;
+      config.lat = e.lngLat.lat;
+
       MapUtils.addMarker([e.lngLat.lng, e.lngLat.lat], this.map);
       MapUtils.flyTo([e.lngLat.lng, e.lngLat.lat], this.map);
       MapUtils.makeCircle([e.lngLat.lng, e.lngLat.lat], this.map, kms, '#ffc1bd');
     });
 
     this.map.on('load', () => {
+      const kms = Utils.mToKm(this.range);
+
       MapUtils.addMarker([config.lng, config.lat], this.map);
       MapUtils.makeCircle([config.lng, config.lat], this.map, kms, '#ffc1bd');
     });
   }
 
-  flyTo(item: any): void {
-    MapUtils.flyTo(item.geometry.coordinates, this.map);
-    MapUtils.addMarker(item.geometry.coordinates, this.map);
-  }
-
   goToMyLocation(): void {
     this.apiMapbox.getLocation().then((response) => {
+      const kms = Utils.mToKm(this.range);
+      config.lng = response.coords.longitude;
+      config.lat = response.coords.latitude;
+
       MapUtils.flyTo([response.coords.longitude, response.coords.latitude], this.map);
       MapUtils.addMarker([response.coords.longitude, response.coords.latitude], this.map);
+      MapUtils.makeCircle([response.coords.longitude, response.coords.latitude], this.map, kms, '#ffc1bd');
     }).catch((error) => {});
   }
 

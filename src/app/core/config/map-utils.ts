@@ -127,7 +127,7 @@ export class MapUtils {
       layout: {},
       paint: {
           'fill-color': color,
-          'fill-opacity': 0.5
+          'fill-opacity': 0.45
       }
     });
   }
