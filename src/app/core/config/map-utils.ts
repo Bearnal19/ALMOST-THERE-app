@@ -1,4 +1,5 @@
 import * as mapboxgl from 'mapbox-gl';
+import * as turf from '@turf/turf';
 
 export class MapUtils {
   // Agrega un marcador en el mapa
@@ -130,5 +131,14 @@ export class MapUtils {
           'fill-opacity': 0.45
       }
     });
+  }
+
+  // Verifica si un punto esta dentro de un poligono
+  // params: Punto central [lng, lat], arreglo de puntos representando el poligono
+  static pointIsInside(coordinates: any, dots: any): boolean {
+    const point = turf.point(coordinates);
+    const polygon = turf.polygon([dots], { name: 'poly1'});
+
+    return turf.inside(point, polygon);
   }
 }

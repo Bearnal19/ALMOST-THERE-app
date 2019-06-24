@@ -31,6 +31,20 @@ export class ApiMapboxService {
     );
   }
 
+  // Api: Realiza busquedas en base a un string
+  // Params: valor a buscar, radio del area a buscar (10km dfault)
+  getSearchCoordinates(value: string): any {
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?`
+    + `&access_token=${accessToken}`;
+    return this.http.get<Array<any>>(url, {
+      observe: 'response'
+    }).pipe(
+      map(res => {
+        return res;
+      })
+    );
+  }
+
   // Api: Realiza localizacion actual
   // Params:
   getLocation(): any {
