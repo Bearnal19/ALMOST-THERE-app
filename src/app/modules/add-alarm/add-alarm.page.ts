@@ -30,7 +30,6 @@ export class AddAlarmPage implements OnInit {
       const alarm = items.filter((obj) => {
         return obj.id === id;
       });
-      console.log(alarm);
     });
   }
 
