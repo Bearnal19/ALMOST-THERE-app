@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { ApiMapboxService } from './core/http/api-mapbox.service';
 import * as mapboxgl from 'mapbox-gl';
+import { ThemeService } from './core/service/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -58,7 +59,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private renderer: Renderer2,
     private router: Router,
-    private apiMapbox: ApiMapboxService
+    private apiMapbox: ApiMapboxService,
+    private theme: ThemeService
   ) {
     this.initializeApp();
   }

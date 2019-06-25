@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { config, accessToken } from 'src/app/core/config/config';
 import { MapUtils } from 'src/app/core/config/map-utils';
 import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
+import { ModalConfigPage } from './modal-config/modal-config.page';
+import { OverlayEventDetail } from '@ionic/core';
+import { Utils } from 'src/app/core/config/utils';
 
 @Component({
   selector: 'app-map',
@@ -13,6 +16,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class MapPage implements OnInit {
   map: any;
+  range = 100;
   geojson = {
     type: 'FeatureCollection',
     features: [{
@@ -27,7 +31,11 @@ export class MapPage implements OnInit {
       }
     }]
   };
-  constructor(private router: Router, private apiMapbox: ApiMapboxService, public toastController: ToastController) {
+  constructor(
+    private router: Router,
+    private apiMapbox: ApiMapboxService,
+    public toastController: ToastController,
+    public modalController: ModalController) {
   }
 
   ngOnInit() {
@@ -48,24 +56,54 @@ export class MapPage implements OnInit {
     });
 
     this.map.on('click', (e: any) => {
+      const kms = Utils.mToKm(this.range);
+      config.lng = e.lngLat.lng;
+      config.lat = e.lngLat.lat;
+
       MapUtils.addMarker([e.lngLat.lng, e.lngLat.lat], this.map);
-      MapUtils.flyTo([e.lngLat.lng, e.lngLat.lat], This.map);
-      // MapUtils.makeCircle([e.lngLat.lng, e.lngLat.lat], This.map, 0.5);
+      MapUtils.flyTo([e.lngLat.lng, e.lngLat.lat], this.map);
+      MapUtils.makeCircle([e.lngLat.lng, e.lngLat.lat], this.map, kms, '#ffc1bd');
     });
 
-    MapUtils.addMarker([config.lng, config.lat], this.map);
-  }
+    this.map.on('load', () => {
+      const kms = Utils.mToKm(this.range);
 
-  flyTo(item: any): void {
-    MapUtils.flyTo(item.geometry.coordinates, this.map);
-    MapUtils.addMarker(item.geometry.coordinates, this.map);
+      MapUtils.addMarker([config.lng, config.lat], this.map);
+      MapUtils.makeCircle([config.lng, config.lat], this.map, kms, '#ffc1bd');
+    });
   }
 
   goToMyLocation(): void {
     this.apiMapbox.getLocation().then((response) => {
+      const kms = Utils.mToKm(this.range);
+      config.lng = response.coords.longitude;
+      config.lat = response.coords.latitude;
+
       MapUtils.flyTo([response.coords.longitude, response.coords.latitude], this.map);
       MapUtils.addMarker([response.coords.longitude, response.coords.latitude], this.map);
+      MapUtils.makeCircle([response.coords.longitude, response.coords.latitude], this.map, kms, '#ffc1bd');
     }).catch((error) => {});
+  }
+
+  async showConfig() {
+    const modal = await this.modalController.create({
+      component: ModalConfigPage,
+      componentProps: {
+        range: this.range
+      }
+    });
+    modal.onDidDismiss()
+      .then((data) => {
+        this.setData(data.data);
+    });
+    await modal.present();
+  }
+
+  setData(data: any): void {
+    this.range = data.value.range;
+    const kms = Utils.mToKm(this.range);
+
+    MapUtils.makeCircle([config.lng, config.lat], this.map, kms, '#ffc1bd');
   }
 
   async test() {

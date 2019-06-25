@@ -7,6 +7,7 @@ import { MapPage } from './map.page';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchAddressComponent } from '../../shared/components/search-address/search-address.component';
+import { ModalConfigPage } from './modal-config/modal-config.page';
 
 const routes: Routes = [
   {
@@ -26,6 +27,12 @@ const routes: Routes = [
     }),
     HttpClientModule
   ],
-  declarations: [MapPage, SearchAddressComponent]
+
+  declarations: [
+    MapPage,
+    SearchAddressComponent,
+    ModalConfigPage
+  ],
+  entryComponents: [ModalConfigPage]
 })
 export class MapPageModule {}
