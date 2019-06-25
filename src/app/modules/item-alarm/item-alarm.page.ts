@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { config } from '../../core/config/config';
 import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
+import { AlarmStorageService, Alarm } from 'src/app/core/service/alarmStorage.service';
+import * as uuid from 'uuid';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-item-alarm',
@@ -65,19 +68,39 @@ export class ItemAlarmPage implements OnInit {
     }
   ];
 
-  constructor(private router: Router, private apiMapbox: ApiMapboxService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private navCtrl: NavController,
+    private apiMapbox: ApiMapboxService,
+    private alarmStorage: AlarmStorageService
+  ) { }
 
   ngOnInit() {
   }
 
   editItemAlarm() {
-    this.router.navigateByUrl('/add-alarm');
+    this.navCtrl.navigateRoot('/add-alarm');
   }
 
   changeAlarmStatus() {
 
   }
 
-  deleteAlarm() { }
+  addAlarm() {
+    const id = uuid();
+    const alarm = {
+      id,
+      'alarm-name': 'Una alarma',
+      hora: '12:20pm'
+    } as Alarm;
+
+    this.alarmStorage.addItem(alarm).then(() => {
+      this.navCtrl.navigateRoot('/add-alarm/' + id);
+    });
+  }
+
+  deleteAlarm() {
+
+  }
 
 }

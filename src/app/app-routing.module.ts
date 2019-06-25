@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: './modules/list/list.module#ListPageModule'
   },
   {
-    path: 'add-alarm',
+    path: 'add-alarm/:id',
     loadChildren: './modules/add-alarm/add-alarm.module#AddAlarmPageModule'
   },
   {
@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: './modules/settings/settings.module#SettingsPageModule'
-  },  { path: 'modal-config', loadChildren: './modules/map/modal-config/modal-config.module#ModalConfigPageModule' }
+  },
+  { path: 'modal-config', loadChildren: './modules/map/modal-config/modal-config.module#ModalConfigPageModule' }
 
 ];
 
