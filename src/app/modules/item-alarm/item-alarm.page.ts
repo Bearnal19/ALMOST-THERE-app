@@ -3,9 +3,10 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { config } from '../../core/config/config';
 import { ApiMapboxService } from 'src/app/core/http/api-mapbox.service';
-import { AlarmStorageService, Alarm } from 'src/app/core/service/alarmStorage.service';
+import { AlarmStorageService } from 'src/app/core/service/alarmStorage.service';
 import * as uuid from 'uuid';
 import { Storage } from '@ionic/storage';
+import { Alarm } from 'src/app/core/interface/alarm';
 
 @Component({
   selector: 'app-item-alarm',
@@ -13,61 +14,8 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./item-alarm.page.scss'],
 })
 export class ItemAlarmPage implements OnInit {
-  public alarms = [
-    {
-      name: 'Alarm1',
-      location: '',
-      days: {
-        mon: true,
-        tue: true,
-        wen: true,
-        fri: true,
-        sat: true,
-        sun: true
-      },
-      status: true
-    },
-    {
-      name: 'Alarm2',
-      location: '',
-      days: {
-        mon: true,
-        tue: true,
-        wen: true,
-        fri: true,
-        sat: true,
-        sun: true
-      },
-      status: true
-    },
-    {
-      name: 'Alarm3',
-      location: '',
-      days: {
-        mon: true,
-        tue: true,
-        wen: true,
-        fri: true,
-        sat: true,
-        sun: true
-      },
-      status: true
-    },
-    {
-      name: 'Alarm4',
-      location: '',
-      days: {
-        mon: true,
-        tue: true,
-        wen: true,
-        fri: true,
-        sat: true,
-        sun: true
-      },
-      status: true
-    }
-  ];
 
+  alarms: Array<Alarm>;
   constructor(
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
@@ -76,13 +24,17 @@ export class ItemAlarmPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alarmStorage.getItems().then((items) => {
+      this.alarms = items;
+      console.log(this.alarms);
+    });
   }
 
-  editItemAlarm() {
-    this.navCtrl.navigateRoot('/add-alarm');
+  editAlarm(alarm) {
+    this.navCtrl.navigateRoot('/add-alarm/' + alarm.id);
   }
 
-  changeAlarmStatus() {
+  changeAlarmStatus(alarm ) {
 
   }
 
@@ -90,8 +42,18 @@ export class ItemAlarmPage implements OnInit {
     const id = uuid();
     const alarm = {
       id,
-      'alarm-name': 'Una alarma',
-      hora: '12:20pm'
+      name: 'Una alarma',
+      hour: '12:20pm',
+      location: '',
+      days: {
+        mon: true,
+        tue: true,
+        wen: true,
+        fri: true,
+        sat: true,
+        sun: false
+      },
+      status: true
     } as Alarm;
 
     this.alarmStorage.addItem(alarm).then(() => {
@@ -99,8 +61,13 @@ export class ItemAlarmPage implements OnInit {
     });
   }
 
-  deleteAlarm() {
-
+  deleteAlarm(alarm) {
+    this.alarmStorage.deleteItem(alarm.id).then((item) => {
+      this.alarmStorage.getItems().then((items) => {
+        this.alarms = items;
+        console.log(this.alarms);
+      });
+    });
   }
 
 }

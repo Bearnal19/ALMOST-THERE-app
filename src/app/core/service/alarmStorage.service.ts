@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-
-export interface Alarm {
-  id: string;
-  'alarm-name': string;
-  hora: string;
-}
+import { Alarm } from '../interface/alarm';
 
 const ITEMS_KEY = 'alarms';
 
@@ -31,6 +26,15 @@ export class AlarmStorageService {
   // READ
   getItems(): Promise<Alarm[]> {
     return this.storage.get(ITEMS_KEY);
+  }
+
+  // READ BY ID
+  getItemById(id: string): Promise<Alarm> {
+    return this.storage.get(ITEMS_KEY).then((items) => {
+      return items.filter((obj) => {
+        return obj.id === id;
+      });
+    });
   }
 
   // UPDATE

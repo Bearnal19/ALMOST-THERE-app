@@ -21,15 +21,20 @@
       </ion-label>
     </ion-list-header>
     <ion-item-sliding *ngFor="let alarm of alarms">
-      <ion-item >
-        <ion-label (click)="editItemAlarm()">
+      <ion-item>
+        <ion-label>
           <h3>{{alarm.name}}</h3>
           <p>L-M-M-J-V-S-D</p>
         </ion-label>
         <ion-toggle (click)="changeAlarmStatus()"></ion-toggle>
       </ion-item>
       <ion-item-options side="start">
-        <ion-item-option color="danger" expandable (click)= "deleteAlarm()">
+        <ion-item-option color="primary" expandable (click)="editAlarm(alarm)">
+          <ion-icon name="options"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)= "deleteAlarm(alarm)">
           <ion-icon name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
