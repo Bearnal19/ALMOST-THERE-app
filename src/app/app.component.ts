@@ -62,10 +62,10 @@ export class AppComponent {
     private renderer: Renderer2,
     private router: Router,
     private apiMapbox: ApiMapboxService,
-    private theme: ThemeService,
-    private androidPermissions: AndroidPermissions,
-    private geolocation: Geolocation,
-    private locationAccuracy: LocationAccuracy
+    private theme: ThemeService
+    // private androidPermissions: AndroidPermissions,
+    // private geolocation: Geolocation,
+    // private locationAccuracy: LocationAccuracy
   ) {
     this.initializeApp();
   }
@@ -77,68 +77,68 @@ export class AppComponent {
     });
     Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken')
     .set(accessToken);
-    // this.apiMapbox.getLocation().then((response) => {}).catch((error) => {});
-    this.checkGPSPermission();
+    this.apiMapbox.getLocation().then((response) => {}).catch((error) => {});
+    // this.checkGPSPermission();
   }
 
   // Check if application having GPS access permission
-  checkGPSPermission() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-      result => {
-        if (result.hasPermission) {
+  // checkGPSPermission() {
+  //   this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+  //     result => {
+  //       if (result.hasPermission) {
 
-          // If having permission show 'Turn On GPS' dialogue
-          this.askToTurnOnGPS();
-        } else {
+  //         // If having permission show 'Turn On GPS' dialogue
+  //         this.askToTurnOnGPS();
+  //       } else {
 
-          // If not having permission ask for permission
-          this.requestGPSPermission();
-        }
-      },
-      err => {
-        alert(err);
-      }
-    );
-  }
+  //         // If not having permission ask for permission
+  //         this.requestGPSPermission();
+  //       }
+  //     },
+  //     err => {
+  //       alert(err);
+  //     }
+  //   );
+  // }
 
-  requestGPSPermission() {
-    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-      if (canRequest) {
-        console.log('4');
-      } else {
-        // Show 'GPS Permission Request' dialogue
-        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
-          .then(
-            () => {
-              // call method to turn on GPS
-              this.askToTurnOnGPS();
-            },
-            error => {
-              // Show alert if user click on 'No Thanks'
-              alert('requestPermission Error requesting location permissions ' + error)
-            }
-          );
-      }
-    });
-  }
+  // requestGPSPermission() {
+  //   this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+  //     if (canRequest) {
+  //       console.log('4');
+  //     } else {
+  //       // Show 'GPS Permission Request' dialogue
+  //       this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+  //         .then(
+  //           () => {
+  //             // call method to turn on GPS
+  //             this.askToTurnOnGPS();
+  //           },
+  //           error => {
+  //             // Show alert if user click on 'No Thanks'
+  //             alert('requestPermission Error requesting location permissions ' + error)
+  //           }
+  //         );
+  //     }
+  //   });
+  // }
 
-  askToTurnOnGPS() {
-    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-      () => {
-        // When GPS Turned ON call method to get Accurate location coordinates
-        this.getLocationCoordinates();
-      },
-      error => alert('Error requesting location permissions ' + JSON.stringify(error))
-    );
-  }
+  // askToTurnOnGPS() {
+  //   this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+  //     () => {
+  //       // When GPS Turned ON call method to get Accurate location coordinates
+  //       this.getLocationCoordinates();
+  //     },
+  //     error => alert('Error requesting location permissions ' + JSON.stringify(error))
+  //   );
+  // }
 
-  // Methos to get device accurate coordinates using device GPS
-  getLocationCoordinates() {
-    this.geolocation.getCurrentPosition((resp) => {
-      config.lat = resp.coords.latitude;
-      config.lng = resp.coords.longitude;
-    });
-  }
+  // // Methos to get device accurate coordinates using device GPS
+  // getLocationCoordinates() {
+  //   this.geolocation.getCurrentPosition((resp) => {
+  //     config.lat = resp.coords.latitude;
+  //     config.lng = resp.coords.longitude;
+  //   });
+  // }
 
   goToAddAlarm() {
     this.router.navigateByUrl('/add-alarm');
