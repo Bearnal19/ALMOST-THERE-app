@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+//Notification import
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 // import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 // import { Geolocation } from '@ionic-native/geolocation/ngx';
 // import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
@@ -32,7 +34,8 @@ import { IonicStorageModule } from '@ionic/storage';
     // AndroidPermissions,
     // Geolocation,
     // LocationAccuracy,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })
