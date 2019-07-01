@@ -21,7 +21,10 @@
             </div>
           </div>
         </ion-list>
-        <div class="login">
+        <div class="login" (click)="goToLogin()" *ngIf="logButton==false" style="background-color:green">
+          <p>Log in</p>
+        </div>
+        <div class="login" (click)="logout()" *ngIf="logButton==true" style="background-color:darkred">
           <p>Log out</p>
         </div>
       </ion-content>

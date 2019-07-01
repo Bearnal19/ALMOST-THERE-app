@@ -4,12 +4,14 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  public logButton: boolean = false;
   public appPages = [
     {
       title: 'Home',
@@ -49,7 +51,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private renderer: Renderer2,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ) {
     this.initializeApp();
   }
@@ -58,10 +61,31 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.authService.authenticationState.subscribe(state =>{
+        console.log('Auth changed', state);
+        console.log('for html', this.logButton);
+        if(state){
+          this.logButton=true;
+          this.router.navigateByUrl('')
+        }else{
+          this.logButton = false;
+          this.router.navigateByUrl('');
+        }
+      });
     });
   }
 
   goToAddAlarm() {
     this.router.navigateByUrl('/add-alarm');
+  }
+
+  goToLogin(){
+    //alert("Hola");
+    this.router.navigateByUrl('/login');
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }

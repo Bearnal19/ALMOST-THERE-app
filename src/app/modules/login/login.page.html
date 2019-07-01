@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div >
+    <img class="profile-photo" src="./assets/image/images.jpg" alt="Avatar">
+  </div>
+  <div class="login-inputs">
+    <ion-input placeholder="Username" [(ngModel)]="usr"></ion-input>
+    <ion-input placeholder="Password" [(ngModel)]="pwd" type="password"></ion-input>
+    <ion-button expand="block" (click)="login()">Log in</ion-button>
+  </div>
+  <div class="message">
+    <h6>Create new account</h6>
+    <ion-label color="danger">{{msg}}</ion-label>
+  </div>
+</ion-content>
